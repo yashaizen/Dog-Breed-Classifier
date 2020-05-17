@@ -61,7 +61,7 @@ import torch.optim as optim
 
 criterion_scratch = nn.CrossEntropyLoss()
 
-optimizer_scratch = optim.SGD(model_scratch.parameters(), lr = 0.01)
+optimizer_scratch = optim.SGD(model_scratch.parameters(), lr = 0.003)
 
 
 
