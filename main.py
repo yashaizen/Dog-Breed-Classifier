@@ -110,16 +110,16 @@ def train(n_epochs, loaders, model, optimizer, criterion, use_cuda, save_path):
             loss = criterion(output, target)
             valid_loss += loss.item()*data.size(0)
     
-    #average losses
-    train_loss = train_loss/len(train_loader.dataset)
-    valid_loss = valid_loss/len(valid_loader.dataset)
-        
-    # print training/validation statistics 
-    print('Epoch: {} \tTraining Loss: {:.6f} \tValidation Loss: {:.6f}'.format( epoch, train_loss, valid_loss ))
+        #average losses
+        train_loss = train_loss/len(train_loader.dataset)
+        valid_loss = valid_loss/len(valid_loader.dataset)
 
-    if valid_loss <= valid_loss_min:
-        torch.save(model.state_dict(), 'model_scratch.pt')
-        valid_loss_min = valid_loss
+        # print training/validation statistics 
+        print('Epoch: {} \tTraining Loss: {:.6f} \tValidation Loss: {:.6f}'.format( epoch, train_loss, valid_loss ))
+
+        if valid_loss <= valid_loss_min:
+            torch.save(model.state_dict(), 'model_scratch.pt')
+            valid_loss_min = valid_loss
         
     # return trained model
     return model
