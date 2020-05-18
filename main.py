@@ -26,6 +26,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 # define the CNN architecture
 class Net(nn.Module):
+    ### TODO: choose an architecture, and complete the class
     def __init__(self):
         super(Net, self).__init__()
         ## Define layers of a CNN
@@ -34,10 +35,12 @@ class Net(nn.Module):
         self.conv3 = nn.Conv2d(32,64,3, padding = 1)
         self.conv4 = nn.Conv2d(64,80,3, padding = 1)
         self.lin1 = nn.Linear(80*14*14,500)
-        self.lin2 = nn.Linear(500,300)
-        self.lin3 = nn.Linear(300,133)
+        self.lin2 = nn.Linear(500,500)
+        self.lin3 = nn.Linear(500,300)
+        self.lin4 = nn.Linear(300,133)
         self.dropout = nn.Dropout(0.25)
         self.pool = nn.MaxPool2d(2, 2)
+
  
     
     def forward(self, x):
@@ -53,6 +56,8 @@ class Net(nn.Module):
         x = (F.relu(self.lin2(x)))
         x = self.dropout(x)
         x = self.lin3(x)
+        x = self.dropout(x)
+        x = self.lin4(x)
         
         return x
         
@@ -61,7 +66,7 @@ import torch.optim as optim
 
 criterion_scratch = nn.CrossEntropyLoss()
 
-optimizer_scratch = optim.SGD(model_scratch.parameters(), lr = 0.003)
+optimizer_scratch = optim.Adam(model_scratch.parameters(), lr = 0.001)
 
 
 
